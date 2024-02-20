@@ -20,3 +20,12 @@ unistd.hはUNIX系システムの標準ヘッダーファイルで、標準入�
 gcc -o stock_price_fetcher stock_price_fetcher.c -lcurl
 
 ```
+4.tracerouteのインストール
+
+```
+sudo apt-get update
+sudo apt-get install traceroute
+traceroute www.alphavantage.co
+
+
+```
