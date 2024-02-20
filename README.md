@@ -61,14 +61,13 @@ sudo apt-get install traceroute
 ```
 実行コマンド`traceroute www.alphavantage.co`
 
-## APIキーを伏せるには
-
-```
-5. .envファイルの作成
+## APIキーを隠すには（githubの場合）
+1. .envファイルを作成する
+プロジェクトのルートディレクトリに.envファイルを作成する
 ```
 API_KEY=your_api_key_here
 ```
-6. .gitignoreファイルの作成
+2. .gitignoreファイルに追記する
 
 プロジェクトのルートディレクトリに.gitignoreファイルを作成します。
 .gitignoreファイルに.envファイルを追加して、Gitの追跡対象から除外します。ファイルの内容は以下のようになります：
@@ -76,9 +75,18 @@ API_KEY=your_api_key_here
 .env
 ```
 
-7.load_env.shスクリプトの作成
+3.load_env.shスクリプトの作成
 
 ```
 #!/bin/bash
 export $(grep -v '^#' .env | xargs)
 ```
+4.load_env.shの実行権限を設定して実行する
+ターミナルで以下のコマンドを実行し、load_env.shに実行権限を付与します。
+```
+chmod +x load_env.sh
+./load_env.sh
+```
+
+この方法で環境変数を設定すると、load_env.shを実行したシェルセッション内でのみ環境変数が利用可能になります。新しいターミナルやシェルセッションを開くと、再度load_env.shを実行する必要があります。
+環境変数はセッション間で共有されないため、セキュリティの観点からも安全な方法です。ただし、.envファイルやスクリプトファイルに機密情報を含む場合は、これらのファイルのアクセス権を適切に管理し、無関係なユーザーからアクセスできないようにすることが重要です。
